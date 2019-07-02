@@ -17,17 +17,31 @@ According to [Google's Cloud Pricing Calculator](https://cloud.google.com/produc
 ### Library (btcrecover)
 After I forgot my wallet I started imagining something very similar to btcrecover. Unfortunately, token replacement is insufficient to find my lost password, so I'm resorting to brute-forcing.
 
-## Build
+## Operations
+
+#### 0. Clone this repo
+
+#### 1. Extract vital wallet info
+https://github.com/gurnec/btcrecover/blob/master/docs/Extract_Scripts.md
+
+Copy it to a file named walletinfo.txt in the repo's directory.
+
+#### 3. Build the image
 ```cmd
 docker build . -t brutus
 ```
 
-## Enter the container
+#### Run and enter the container
 ```cmd
-docker run -it brutus
+docker run -it --name brutus brutus
 ```
 
-## Saving the image
+### Run the bruteforcer script
+```bash
+cat walletinfo.txt | python btcrecover.py --data-extract --autosave savefile --tokenlist tokens.txt
+```
+
+#### Save the image
 ```cmd
 docker build -t timothygb/electrum-wallet-bruteforcer:master
 ```
