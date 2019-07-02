@@ -1,4 +1,7 @@
 FROM debian:9
-RUN apt-get update && apt-get install git wget --assume-yes
+RUN apt-get update \
+    && apt-get install git python2.7 --assume-yes \
+    && ln -s /usr/bin/python2.7 /bin/python
 RUN cd /root && git clone https://github.com/timothy-b/btcrecover.git
-RUN cd /root && wget https://raw.githubusercontent.com/timothy-b/Electrum-Wallet-Bruteforcer/master/tokens.txt
+ADD walletinfo.txt /root/btcrecover
+ADD tokens.txt /root/btcrecover
