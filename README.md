@@ -24,7 +24,7 @@ After I forgot my wallet I started imagining something very similar to btcrecove
 #### 1. Extract vital wallet info
 https://github.com/gurnec/btcrecover/blob/master/docs/Extract_Scripts.md
 
-Copy it to a file named `walletinfo.txt`.
+Then set it as an environment variable named `WALLETINFO`.
 
 #### 2. Pull the container
 https://cloud.docker.com/repository/docker/timothygb/epb
@@ -35,7 +35,7 @@ docker pull timothygb/epb:brutus
 
 #### 3. Run and enter the container
 ```cmd
-docker run -it --name brutus brutus
+docker run -it -e WALLETINFO --name brutus brutus
 ```
 
 #### 4. Modify the tokens list

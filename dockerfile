@@ -5,5 +5,7 @@ RUN apt-get update \
     && ln -s /usr/bin/python2.7 /bin/python \
     && pip install pycrypto
 RUN cd /root && git clone https://github.com/timothy-b/btcrecover.git
-ADD run.sh /root/btcrecover
-ADD tokens.txt /root/btcrecover
+WORKDIR /root/btcrecover
+ADD run.sh .
+ADD tokens.txt .
+ENTRYPOINT [ "./run.sh" ]
