@@ -36,9 +36,10 @@ docker build . -t brutus
 docker run -it --name brutus brutus
 ```
 
-### Run the bruteforcer script
+### Run the bruteforcer
+Modify the charset as needed.
 ```bash
-cat walletinfo.txt | python btcrecover.py --data-extract --autosave savefile --tokenlist tokens.txt
+cat walletinfo.txt | python btcrecover.py --data-extract --autosave savefile --custom-wild "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/\|()[]^<>@'#$%&*{} " --tokenlist tokens.txt
 ```
 
 #### Save the image
