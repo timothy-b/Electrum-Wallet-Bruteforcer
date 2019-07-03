@@ -1,0 +1,2 @@
+#!/bin/bash
+cat walletinfo.txt | python btcrecover.py --data-extract --autosave savefile --custom-wild "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/\|()[]^<>@'#\$*{} " --no-dupchecks --tokenlist tokens.txt

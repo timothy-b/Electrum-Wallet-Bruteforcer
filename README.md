@@ -19,30 +19,59 @@ After I forgot my wallet I started imagining something very similar to btcrecove
 
 ## Operations
 
-#### 0. Clone this repo
+### Production
 
 #### 1. Extract vital wallet info
 https://github.com/gurnec/btcrecover/blob/master/docs/Extract_Scripts.md
 
-Copy it to a file named walletinfo.txt in the repo's directory.
+Copy it to a file named `walletinfo.txt`.
 
-#### 3. Build the image
+#### 2. Pull the container
+https://cloud.docker.com/repository/docker/timothygb/epb
+
 ```cmd
-docker build . -t brutus
+docker pull timothygb/epb:brutus
 ```
 
-#### Run and enter the container
+#### 3. Run and enter the container
 ```cmd
 docker run -it --name brutus brutus
 ```
 
-### Run the bruteforcer
-Modify the charset as needed.
-```bash
-cat walletinfo.txt | python btcrecover.py --data-extract --autosave savefile --custom-wild "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/\|()[]^<>@'#$%&*{} " --tokenlist tokens.txt
+#### 4. Modify the tokens list
+https://github.com/gurnec/btcrecover/blob/master/TUTORIAL.md#expanding-wildcards
+
+To keep it simple, you can just use custom wildcards.
+
+A couple of brief examples.
+
+Try all combinations of the custom wildcards, for a password of length 4:
+```
+%4c
+```
+
+Try all combinations of the custom wildcards, for a password of length 10-20:
+```
+%10,20c
+```
+
+
+#### 4. Run the bruteforcer
+Modify the charset as needed in [run.sh](run.sh)
+
+If the run is interrupted, it can be resumed given that `savefile` is intact. If you change `tokens.txt` or the wildcards, delete the `savefile` before running the bruteforcer. It will complain if you don't.
+
+
+### Development
+
+#### Fork and clone this repo
+
+#### Build the image
+```cmd
+docker build . -t brutus
 ```
 
 #### Save the image
 ```cmd
-docker build -t timothygb/electrum-wallet-bruteforcer:master
+docker push timothygb/electrum-wallet-bruteforcer:brutus
 ```
